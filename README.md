@@ -36,7 +36,6 @@ src/
 │   ├── TodoItems.module.css
 │   ├── WelcomeMessage.jsx
 │   └── WelcomeMessage.module.css
-
 │
 ├── store/
 │   └── todo-items-store.jsx

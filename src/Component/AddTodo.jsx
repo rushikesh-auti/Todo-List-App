@@ -1,52 +1,51 @@
 import { useRef, useContext } from "react";
-import { TodoItemsContext } from "../../Store/todo-items-store";
+import { TodoItemsContext } from "../../Store/todo-items-store.jsx";
 
 function AddTodo() {
   const { addNewItem } = useContext(TodoItemsContext);
 
-  const todoNameElement = useRef();
-  const todoDateElement = useRef();
+  const nameRef = useRef();
+  const dateRef = useRef();
 
-  const handleAddButtonClicked = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const todoName = todoNameElement.current.value;
-    const todoDate = todoDateElement.current.value;
+    const name = nameRef.current.value;
+    const date = dateRef.current.value;
 
-    todoNameElement.current.value = "";
-    todoDateElement.current.value = "";
+    if (!name || !date) return;
 
-    addNewItem(todoName, todoDate);
+    addNewItem(name, date);
+
+    nameRef.current.value = "";
+    dateRef.current.value = "";
   };
 
   return (
-    <div className="container text-center">
-      <form className="row kg-row" onSubmit={handleAddButtonClicked}>
-        <div className="col-6">
-          <input
-            type="text"
-            ref={todoNameElement}
-            placeholder="Enter Todo Here"
-          />
-        </div>
+    <form className="row g-2 mb-3" onSubmit={handleSubmit}>
+      <div className="col-6">
+        <input
+          type="text"
+          ref={nameRef}
+          className="form-control"
+          placeholder="Enter Todo"
+        />
+      </div>
 
-        <div className="col-4">
-          <input
-            type="date"
-            ref={todoDateElement}
-          />
-        </div>
+      <div className="col-4">
+        <input
+          type="date"
+          ref={dateRef}
+          className="form-control"
+        />
+      </div>
 
-        <div className="col-2">
-          <button
-            type="submit"
-            className="btn btn-success kg-button"
-          >
-            Add
-          </button>
-        </div>
-      </form>
-    </div>
+      <div className="col-2">
+        <button type="submit" className="btn btn-success w-100">
+          Add
+        </button>
+      </div>
+    </form>
   );
 }
 
